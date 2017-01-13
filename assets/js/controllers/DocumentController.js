@@ -1,6 +1,6 @@
 (function(){
   angular.module('ShingoDocumentationApp')
-  .controller('DocumentController', ['$scope', '$routeParams', 'documents', 'tags', 'methods', 'auth','$location', '$window','$q','_','toast','dialog',DocumentController]);
+  .controller('DocumentController', ['$scope', '$routeParams', 'documents', 'tags', 'methods', 'auth','$location', '$window','$q','_','toast','dialog', DocumentController]);
 
   function AddController($scope, $mdDialog){
     $scope.method = {parameters:[]};

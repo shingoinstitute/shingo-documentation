@@ -57,11 +57,11 @@
     }
 
     vm.login = function(){
-      $window.location.href = 'http://docs.shingo.org/auth/login';
+      $window.location.href = 'http://docs.shingo.org:8085/auth/login';
     }
 
     vm.logout = function(){
-      $window.location.href = 'http://docs.shingo.org/auth/logout';
+      $window.location.href = 'http://docs.shingo.org:8085/auth/logout';
     }
 
     vm.openMenu = function($mdOpenMenu, ev) {
