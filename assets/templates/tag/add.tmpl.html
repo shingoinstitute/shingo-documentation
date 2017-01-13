@@ -1,0 +1,40 @@
+<md-dialog aria-label="Add Tags" style="min-width: 400px">
+  <form name="tagForm" layout-fill novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Tags</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-icon-fong="close" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout-fill>
+      <div class="md-dialog-content" layout="column" layout-align="center center" layout-fill>
+        <md-input-container layout-fill>
+          <label>Tags</label>
+          <md-chips ng-model="selected" md-autocomplete-snap
+            md-transform-chip="transformChip($chip)"
+            md-require-match="false">
+            <md-autocomplete
+              md-selected-item="selectedItem"
+              md-search-text="searchText"
+              md-items="tag in search(searchText)"
+              md-item-text="tag.label"
+              placeholder="Search for a tag">
+              <span md-highlight-text="searchText">{{tag.label}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <span>
+                <strong>{{$chip.label}}</strong>
+              </span>
+            </md-chip-template>
+          </md-chips>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button ng-disabled="tagForm.$invalid" class="md-raised md-primary" type="submit" ng-click="answer()">Submit</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

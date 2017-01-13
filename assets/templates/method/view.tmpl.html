@@ -1,0 +1,102 @@
+<div ng-controller="MethodController as vm" style="height: 100vh;">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        <span>Method {{vm.method.title}}</span>
+      </h2>
+      <span flex></span>
+      <md-button class="md-fab md-raised md-mini" aria-label="Back" ng-click="vm.go('/document/' + vm.method.document.uuid)">
+        <md-tooltip md-direction="bottom" md-visible="tooltipVisible">Back</md-tooltip>
+        <md-icon md-font-icon="arrow back">arrow_back</md-icon>
+      </md-button>
+      <md-menu ng-show="vm.isAuthed">
+        <md-button aria-label="Account Options" class="md-fab md-raised md-mini" ng-click="vm.openMenu($mdOpenMenu, $event)">
+          <md-tooltip md-direction="bottom" md-visible="tooltipVisible">{{vm.me.displayName}}</md-tooltip>
+          <md-icon md-font-icon="account circle">account_circle</md-icon>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item>
+            <md-button ng-click="vm.logout()">
+              <md-icon md-font-icon="exit to app">exit_to_app</md-icon>
+              Logout
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-button ng-show="!vm.isAuthed" class="md-fab md-raised md-mini" aria-label="Login" ng-click="vm.login()">
+        <md-tooltip md-direction="bottom" md-visible="tooltipVisible">Login</md-tooltip>
+        <md-icon md-font-icon="settings applications">settings_applications</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <section layout="row" flex layout-fill>
+    <md-sidenav
+      class="md-sidenav-left"
+      md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-md')"
+      md-whiteframe="4">
+      <md-content layout-padding>
+        <md-list>
+          <md-list-item>
+            <md-button ng-class="['md-primary' ,'menu-link' ,'{{vm.activeLink.projects}}']" md-colors="{'border-color': 'accent-600'}" ng-href="/#/">Projects</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-class="['md-primary' ,'menu-link' ,'{{vm.activeLink.tags}}']" md-colors="{'border-color': 'accent-600'}" ng-href="/#/tag">Tags</md-button>
+          </md-list-item>
+          <md-list-item>
+            <md-button ng-class="['md-primary' ,'menu-link' ,'{{vm.activeLink.search}}']" md-colors="{'border-color': 'accent-600'}" ng-href="/#/search">Search</md-button>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+    <md-content layout-padding flex>
+      <div layout="column" layout-algin="top-center">
+        <md-card flex layout-fill>
+            <md-card-header md-colors="{'background': 'accent'}">
+              <md-card-header-text>
+                <span class="md-title">Method Details</span>
+                <span ng-show="vm.method.deprecated"> (Deprecated)</span>
+              </md-card-header-text>
+            </md-card-header>
+            <md-card-title>
+              <md-card-title-text ng-class="vm.method.deprecated ? 'deprecated':''">
+                <span class="md-headline">{{vm.method.name}}</span>
+                <span class="md-subhead">{{vm.method.shortDescription}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="row" layout-align="space-between">
+              <div class="column">
+                <h4>Parameters</h4>
+                <md-chips ng-model="vm.method.parameters" readonly="true">
+                </md-chips>
+                <h4>Return Value</h4>
+                <p>{{vm.method.returnValue}}</p>
+                <h4>Tags</h4>
+                <md-chips ng-model="vm.method.tags" readonly="true">
+                  <md-chip-template class="clickable" ng-click="vm.go('/tag/' + $chip.uuid)">
+                    <span>
+                      <strong>{{$chip.label}}</strong>
+                    </span>
+                  </md-chip-template>
+                </md-chips>
+              </div>
+              <md-card-actions layout="column">
+                <md-button ng-show="vm.isAuthed" class="md-icon-button" aria-label="Edit" ng-click="vm.edit()">
+                  <md-tooltip md-direction="left">Edit Method</md-tooltip>
+                  <md-icon md-icon-font="edit">edit</md-icon>
+                </md-button>
+                <md-button ng-show="vm.isAuthed" class="md-icon-button" aria-label="Tags" ng-click="vm.tag()">
+                  <md-tooltip md-direction="left">Add Tags</md-tooltip>
+                  <md-icon md-icon-font="label">label</md-icon>
+                </md-button>
+              </md-card-actions>
+            </md-card-content>
+          </md-card>
+          <md-content layout-padding flex>
+            <h2>Content</h2>
+            <div ng-bind-html="vm.method.content" class="trix-content"></div>
+          </md-content>
+      </div>
+    </md-content>
+  </section>
+</div>

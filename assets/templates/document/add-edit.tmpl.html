@@ -1,0 +1,40 @@
+<md-dialog aria-label="{{title}} Document" style="min-width: 400px">
+  <form name="documentForm" layout-fill novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}} Document</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-icon-fong="close" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout-fill>
+      <div class="md-dialog-content" layout="column" layout-align="center center" layout-fill>
+        <md-input-container layout-fill>
+          <label>Title</label>
+          <input md-maxlength="50" required name="documentTitle" md-autofocus ng-model="document.title">
+          <div ng-messages="documentForm.documentTitle.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The title must be less than 50 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <label>Short Description</label>
+          <input required type="text" name="description" ng-model="document.shortDescription"/>
+          <div ng-messages="documentForm.description.$error">
+            <div ng-message="required">
+              You need a description!
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <trix-editor angular-trix ng-model="document.content"></trix-editor>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button ng-disabled="documentForm.$invalid" class="md-raised md-primary" type="submit" ng-click="answer()">Submit</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,56 @@
+<md-dialog aria-label="{{title}} Method" style="min-width: 400px">
+  <form name="methodForm" layout-fill novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}} Method</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-icon-fong="close" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout-fill>
+      <div class="md-dialog-content" layout="column" layout-align="center center" layout-fill>
+        <md-input-container layout-fill>
+          <label>Name</label>
+          <input md-maxlength="100" required name="methodName" md-autofocus ng-model="method.name">
+          <div ng-messages="methodForm.methodName.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The title must be less than 50 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <label>Short Description</label>
+          <input required type="text" name="description" ng-model="method.shortDescription"/>
+          <div ng-messages="methodForm.description.$error">
+            <div ng-message="required">
+              You need a description!
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <label>Parameters</label>
+          <md-chips ng-model="method.parameters" name="parameters">
+          </md-chips>
+        </md-input-container>
+        <br>
+        <md-input-container layout-fill>
+          <label>Return Value</label>
+          <input md-maxlength="50" type="text" name="returnValue" ng-model="method.returnValue"/>
+          <div ng-messages="methodForm.returnValue.$error">
+            <div ng-message="md-maxlength">The title must be less than 50 characters long.</div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <md-switch ng-model="method.deprecated" aria-label="Is Deprecated">Deprecated</md-switch>
+        </md-input-container>
+        <md-input-container layout-fill>
+          <trix-editor angular-trix ng-model="method.content"></trix-editor>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button ng-disabled="methodForm.$invalid" class="md-raised md-primary" type="submit" ng-click="answer()">Submit</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
