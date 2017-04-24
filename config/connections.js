@@ -42,7 +42,7 @@ module.exports.connections = {
   ***************************************************************************/
   someMysqlServer: {
     adapter: 'sails-mysql',
-    host: SHINGO_MYSQL || 'localhost',
+    host: process.env.SHINGO_MYSQL || 'localhost',
     user: process.env.MYSQL_USER, //optional
     password: process.env.MYSQL_PASS, //optional
     database: 'shingodocumentation' //optional

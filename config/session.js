@@ -55,7 +55,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  host: SHINGO_REDIS || 'localhost',
+  host: process.env.SHINGO_REDIS || 'localhost',
   port: 6379,
   ttl: 120000,
   db: 0,
