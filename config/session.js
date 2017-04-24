@@ -55,12 +55,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // host: 'localhost',
-  // port: 6379,
-  // ttl: <redis session TTL in seconds>,
-  // db: 0,
-  // pass: <redis auth password>,
-  // prefix: 'sess:',
+  host: SHINGO_REDIS || 'localhost',
+  port: 6379,
+  ttl: 120000,
+  db: 0,
+  prefix: 'sess:',
 
 
   /***************************************************************************
